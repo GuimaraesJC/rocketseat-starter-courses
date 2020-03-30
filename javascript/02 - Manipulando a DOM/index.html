@@ -1,0 +1,146 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Curso JavaScript</title>
+    </head>
+    <body>
+        <div id="app"></div>
+
+        <script>
+            /**
+             * 1º exercício
+             *
+             * Crie um botão que, ao ser clicado, cria um novo elemento em tela
+             * com a forma de um quadrado vermelho com 100px de altura e largura.
+             * Sempre que o botão for clicado um novo quadrado deve aparecer na tela.
+             */
+
+            var containerElement = document.querySelector('#app');
+
+            var buttonElement = document.createElement('button');
+
+            buttonElement.onclick = function () {
+                var quadradoElement = document.createElement('div');
+                quadradoElement.style.width = 100;
+                quadradoElement.style.height = 100;
+                quadradoElement.style.backgroundColor = '#F00';
+
+                quadradoElement.onmouseover = function() {
+                    quadradoElement.style.backgroundColor = getRandomColor();
+                }
+
+                containerElement.appendChild(quadradoElement);
+            }
+
+            var buttonTextElement = document.createTextNode('Criar quadrado');
+
+
+
+            buttonElement.appendChild(buttonTextElement);
+            containerElement.appendChild(buttonElement);
+
+
+            /**
+             * 2º exercício
+             *
+             * Utilizando o resultado do primeiro desafio, toda vez que o usuário passar
+             * o mouse por cima de algum quadrado, troque sua cor para uma cor aleatória,
+             * gerada pela função abaixo:
+             * 
+             * function getRandomColor() {
+             *      var letters = "0123456789ABCDEF";
+             *      var color = "#";
+             *      for (var i = 0; i < 6; i++) {
+             *          color += letters[Math.floor(Math.random() * 16)];
+             *      }
+             * 
+             *      return color;
+             * }
+             * 
+             * var newColor = getRandomColor(); // #E943F0
+             */
+
+            function getRandomColor() {
+                var letters = '0123456789ABCDEF';
+                var color = '#';
+                
+                for (var i = 0; i < 6; i++) {
+                    color += letters[Math.floor(Math.random() * 16)];
+                }
+
+                return color;
+            }
+
+
+            /**
+             * 3º exercício
+             *
+             * A partir do seguinte vetor:
+             * 
+             * var nomes = ['Diego', 'Gabriel', 'Lucas'];
+             * 
+             * Preencha uma lista (<ul>) no HTML com os itens da seguinte forma:
+             * 
+             * • Diego
+             * • Gabriel
+             * • Lucas
+             */
+
+             var nomes = ['Diego', 'Gabriel', 'Lucas'];
+
+            var listElement = document.createElement('ul');
+
+            for (var i = 0; i < nomes.length; i++) {
+                var itemElement = document.createElement('li');
+                var nomeElement = document.createTextNode(nomes[i]);
+
+                itemElement.appendChild(nomeElement);
+                listElement.appendChild(itemElement);
+            }
+
+            containerElement.appendChild(listElement);
+
+
+            /**
+             * 4º exercício
+             *
+             * Seguindo o resultado do exercício anterior, adicione um input em tela
+             * e um botão como a seguir:
+             * 
+             * <input type="text" name="nome">
+             * <button onClick="adicionar()">Adicionar</button>
+             * 
+             * Ao clicar no botão, a função "adicionar()" deve ser disparada,adicionando
+             * um novo item à lista de nomes baseado no nome preenchido no input e
+             * renderizando o novo item em tela junto aos demais itens anteriores.
+             * Além disso, o conteúdo do input deve ser apagado após o clique.
+             */
+
+            function adicionar() {
+                var inputText = inputElement.value;
+                
+                var newItemElement = document.createElement('li');
+                var newItemLabel = document.createTextNode(inputText);
+
+                newItemElement.appendChild(newItemLabel);
+                listElement.appendChild(newItemElement);
+
+                inputElement.value = '';
+            }
+
+            var inputElement = document.createElement('input');
+            inputElement.setAttribute('type', 'text');
+            inputElement.setAttribute('name', 'nome');
+
+            var buttonAdicionarElement = document.createElement('button');
+            var buttonAdicionarLabel = document.createTextNode('Adicionar');
+
+            buttonAdicionarElement.onclick = adicionar;
+
+            buttonAdicionarElement.appendChild(buttonAdicionarLabel);
+            
+            containerElement.appendChild(inputElement);
+            containerElement.appendChild(buttonAdicionarElement);
+        </script>
+    </body>
+</html>
